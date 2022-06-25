@@ -3,7 +3,9 @@ import 'base_component.dart';
 
 class TextComponent extends BaseComponent {
   String content;
-  TextComponent({
-    this.content = '',
-  }) : super();
+
+  TextComponent({this.content = '', Map<String, dynamic>? style})
+      : super(
+          style: style,
+        );
 }

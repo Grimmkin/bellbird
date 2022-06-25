@@ -27,8 +27,42 @@ class _HomeState extends State<Home> {
       connected: [],
       author: "Daniel Ogunsola",
       title: "Dog Sitters of Compton",
-      tags: ["#Luis", "#Travel", "#Favorites"],
+      tags: [
+        "#Luis",
+        "#Travel",
+        "#Favorites",
+        "#Luis",
+        "#Travel",
+        "#Favorites",
+        "#Luis",
+        "#Travel",
+        "#Favorites",
+      ],
       elements: [
+        TextComponent(
+          content:
+              "Food: Feed twice per day. Space meals 12 hours apart. Have 34 labradors go into the kennels at 12:30pm",
+        ),
+        TextComponent(
+          content:
+              "Food: Feed twice per day. Space meals 12 hours apart. Have 34 labradors go into the kennels at 12:30pm. Food: Feed twice per day. Space meals 12 hours apart. Have 34 labradors go into the kennels at 12:30pm. Food: Feed twice per day. Space meals 12 hours apart. Have 34 labradors go into the kennels at 12:30pm",
+        ),
+        TextComponent(
+          content:
+              "Food: Feed twice per day. Space meals 12 hours apart. Have 34 labradors go into the kennels at 12:30pm",
+        ),
+        TextComponent(
+          content:
+              "Food: Feed twice per day. Space meals 12 hours apart. Have 34 labradors go into the kennels at 12:30pm",
+        ),
+        TextComponent(
+          content:
+              "Food: Feed twice per day. Space meals 12 hours apart. Have 34 labradors go into the kennels at 12:30pm. Food: Feed twice per day. Space meals 12 hours apart. Have 34 labradors go into the kennels at 12:30pm. Food: Feed twice per day. Space meals 12 hours apart. Have 34 labradors go into the kennels at 12:30pm",
+        ),
+        TextComponent(
+          content:
+              "Food: Feed twice per day. Space meals 12 hours apart. Have 34 labradors go into the kennels at 12:30pm",
+        ),
         TextComponent(
           content:
               "Food: Feed twice per day. Space meals 12 hours apart. Have 34 labradors go into the kennels at 12:30pm",

@@ -8,7 +8,7 @@ class BaseComponent {
     Map<String, dynamic>? style,
   }) : style = style ??
             {
-              "backgroundColor": Colors.amber,
+              "backgroundColor": Colors.transparent,
               "fontColor": Colors.black,
               "fontFamily": TextFontFamily.system,
               "fontSize": 20.0,
@@ -21,5 +21,6 @@ class BaseComponent {
               "strikethrough": false,
               "bullet": Bullet.none,
               "resized": false,
+              "first": false,
             };
 }

@@ -1,5 +1,6 @@
 import 'package:bellbird/logic/components/components.dart';
 import 'package:bellbird/ui/widgets/component_container.dart';
+import 'package:bellbird/ui/widgets/display_widget.dart';
 import 'package:bellbird/ui/widgets/tag_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
@@ -23,7 +24,9 @@ class NotesPage extends StatefulWidget {
 class _NotesPageState extends State<NotesPage> {
   TextEditingController _titleController = TextEditingController();
 
-  TextEditingController emailController = TextEditingController();
+  TextEditingController _footerController = TextEditingController();
+
+  ScrollController _mainController = ScrollController();
 
   @override
   void initState() {
@@ -34,14 +37,16 @@ class _NotesPageState extends State<NotesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16.0,
-                vertical: 8.0,
+              padding: const EdgeInsets.only(
+                left: 8.0,
+                right: 8.0,
+                top: 8.0,
               ),
               child: GestureDetector(
                 onTap: () => Navigator.pop(context),
@@ -59,7 +64,7 @@ class _NotesPageState extends State<NotesPage> {
                         fontSize: 17.0,
                         fontWeight: FontWeight.bold,
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -67,6 +72,7 @@ class _NotesPageState extends State<NotesPage> {
             SizedBox(
               height: MediaQuery.of(context).size.height - 67.0,
               child: ReorderableListView.builder(
+                scrollController: _mainController,
                 header: Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16.0,
@@ -74,12 +80,6 @@ class _NotesPageState extends State<NotesPage> {
                   ),
                   child: Column(
                     children: [
-                      Container(
-                        margin: const EdgeInsets.symmetric(vertical: 8.0),
-                        color: Colors.black12,
-                        height: 2.0,
-                        width: MediaQuery.of(context).size.width - 16.0,
-                      ),
                       TextField(
                         controller: _titleController,
                         onSubmitted: (String value) {
@@ -104,104 +104,42 @@ class _NotesPageState extends State<NotesPage> {
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 8.0,
-                      ),
-                      Row(
-                        children: [
-                          const Text(
-                            "Author",
-                            style: TextStyle(
-                              fontFamily: "SF Pro",
-                              fontSize: 20.0,
-                              color: Colors.black38,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 8.0,
-                          ),
-                          Text(
-                            widget.note.author,
-                            style: const TextStyle(
-                              fontFamily: "SF Pro",
-                              fontSize: 20.0,
-                              color: Colors.black,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 8.0,
-                      ),
-                      Row(
-                        children: [
-                          const Text(
-                            "Last Modified",
-                            style: TextStyle(
-                              fontFamily: "SF Pro",
-                              fontSize: 20.0,
-                              color: Colors.black38,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 8.0,
-                          ),
-                          Text(
-                            DateFormat('dd MMMM yyyy, hh:mm').format(
-                              widget.note.dateCreated,
-                            ),
-                            style: const TextStyle(
-                              fontFamily: "SF Pro",
-                              fontSize: 20.0,
-                              color: Colors.black,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 8.0,
-                      ),
-                      Row(
-                        children: [
-                          const Text(
-                            "Tags",
-                            style: TextStyle(
-                              fontFamily: "SF Pro",
-                              fontSize: 20.0,
-                              color: Colors.black38,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 8.0,
-                          ),
-                          SizedBox(
-                            height: 25.0,
-                            width: MediaQuery.of(context).size.width - 81.0,
-                            child: ListView.builder(
-                              itemBuilder: (context, index) => TagWidget(
-                                tag: widget.note.tags[index],
-                              ),
-                              itemCount: widget.note.tags.length,
-                              scrollDirection: Axis.horizontal,
-                            ),
-                          )
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 8.0,
-                      ),
-                      Container(
-                        margin: const EdgeInsets.symmetric(vertical: 8.0),
-                        color: Colors.black12,
-                        height: 2.0,
-                        width: MediaQuery.of(context).size.width - 16.0,
-                      ),
                     ],
+                  ),
+                ),
+                footer: GestureDetector(
+                  onTap: () {
+                    TextComponent component = TextComponent(
+                      content: "",
+                      style: {
+                        "backgroundColor": Colors.transparent,
+                        "fontColor": Colors.black,
+                        "fontFamily": TextFontFamily.system,
+                        "fontSize": 20.0,
+                        "fontWeight": TextFontWeight.regular,
+                        "alignment": TextAlignment.left,
+                        "indent": 8.0,
+                        "type": TextType.body,
+                        "quote": false,
+                        "block": false,
+                        "strikethrough": false,
+                        "bullet": Bullet.none,
+                        "resized": false,
+                        "first": true,
+                      },
+                    );
+                    setState(() {
+                      widget.note.elements.add(
+                        component,
+                      );
+                    });
+                  },
+                  child: SizedBox(
+                    height: 100.0,
+                    width: MediaQuery.of(context).size.width,
+                    child: Container(
+                      color: Colors.transparent,
+                    ),
                   ),
                 ),
                 buildDefaultDragHandles: false,
@@ -219,13 +157,25 @@ class _NotesPageState extends State<NotesPage> {
                 onReorder: (oldIndex, newIndex) {
                   setState(() {
                     if (newIndex > oldIndex) {
-                      newIndex = newIndex - 1;
+                      newIndex -= 1;
                     }
-                    final element = widget.note.elements.removeAt(oldIndex);
-                    // final elementKey = keys.removeAt(oldIndex);
-                    widget.note.elements.insert(newIndex, element);
-                    // keys.insert(newIndex, elementKey);
+                    final TextComponent item =
+                        widget.note.elements.removeAt(oldIndex);
+                    widget.note.elements.insert(newIndex, item);
                   });
+                  // setState(() {
+                  //   if (newIndex > oldIndex) {
+                  //     newIndex = newIndex - 1;
+                  //   }
+                  //   final element = widget.note.elements.removeAt(oldIndex);
+                  //   widget.note.elements.insert(newIndex, element);
+                  // });
+                },
+                onReorderStart: (index) {
+                  print(widget.note.elements[index].content);
+                },
+                onReorderEnd: (index) {
+                  print(widget.note.elements[index].content);
                 },
               ),
             ),

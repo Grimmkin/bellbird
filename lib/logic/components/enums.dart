@@ -1,8 +1,9 @@
 enum TextFontFamily {
   sansSerif,
   system,
-  mono,
+  monospace,
   round,
+  handwriting,
 }
 
 enum TextFontWeight {

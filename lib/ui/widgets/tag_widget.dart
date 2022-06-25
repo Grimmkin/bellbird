@@ -11,8 +11,9 @@ class TagWidget extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 4.0),
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       decoration: BoxDecoration(
-        color: Colors.grey.shade300,
-        borderRadius: BorderRadius.circular(8.0),
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular(16.0),
+        border: Border.all(),
       ),
       height: 20.0,
       child: Center(
@@ -20,8 +21,8 @@ class TagWidget extends StatelessWidget {
           tag,
           style: const TextStyle(
             fontFamily: "SF Pro",
-            fontSize: 16.0,
-            fontWeight: FontWeight.w500,
+            fontSize: 14.0,
+            fontWeight: FontWeight.w700,
             color: Colors.black,
           ),
         ),
