@@ -150,7 +150,7 @@ class _ComponentContainerState extends State<ComponentContainer> {
               fontFamily:
                   widget.style["quotes"] == true ? "quote" : fontSelector(),
               fontSize: widget.style["fontFamily"] == TextFontFamily.handwriting
-                  ? widget.style["fontSize"] + 10
+                  ? widget.style["fontSize"] + 8
                   : widget.style["fontSize"],
               fontWeight: fontWeightSelector(),
             ),
@@ -975,9 +975,9 @@ class _ComponentContainerState extends State<ComponentContainer> {
   Widget displayWidget(child) {
     return Container(
       margin: EdgeInsets.only(
-        top: 4.0,
+        top: 1.0,
         left: widget.style["indent"],
-        bottom: 4.0,
+        bottom: 1.0,
         right: 8.0,
       ),
       decoration: BoxDecoration(
@@ -1002,6 +1002,9 @@ class _ComponentContainerState extends State<ComponentContainer> {
               width: 20.0,
               child: Center(
                 child: Checkbox(
+                  side: BorderSide(
+                    color: widget.style["fontColor"],
+                  ),
                   checkColor: Colors.white,
                   onChanged: (bool? value) {},
                   value: false,
@@ -1009,13 +1012,14 @@ class _ComponentContainerState extends State<ComponentContainer> {
               ),
             ),
           if (widget.style["bullet"] == Bullet.bullet)
-            const SizedBox(
+            SizedBox(
               width: 20.0,
               child: Center(
                 child: Text(
                   "●",
                   style: TextStyle(
                     fontSize: 20.0,
+                    color: widget.style["fontColor"],
                   ),
                 ),
               ),
@@ -1028,7 +1032,7 @@ class _ComponentContainerState extends State<ComponentContainer> {
           Padding(
             padding: widget.style["bullet"] == Bullet.bullet
                 ? const EdgeInsets.symmetric(vertical: 4.0)
-                : const EdgeInsets.symmetric(vertical: 12.0),
+                : const EdgeInsets.symmetric(vertical: 4.0),
             child: child,
           ),
           if (widget.style["quote"] == true)
@@ -1039,7 +1043,7 @@ class _ComponentContainerState extends State<ComponentContainer> {
             Padding(
               padding: widget.style["bullet"] == Bullet.bullet
                   ? const EdgeInsets.symmetric(vertical: 4.0)
-                  : const EdgeInsets.symmetric(vertical: 12.0),
+                  : const EdgeInsets.symmetric(vertical: 4.0),
               child: SizedBox(
                 child: Icon(
                   FlutterRemix.double_quotes_r,
